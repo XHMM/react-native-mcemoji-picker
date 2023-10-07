@@ -1,31 +1,57 @@
 # react-native-mcemoji-picker
 
-An iOS emoji-picker component for  react-native
+An emoji-picker component for iOS, it's a wrapper of the native implmented component [MCEmojiPicker](https://github.com/izyumkin/MCEmojiPicker)
 
 ## Installation
 
 ```sh
 npm install react-native-mcemoji-picker
+npx pod-install
 ```
 
 ## Usage
 
 ```js
-import { multiply } from 'react-native-mcemoji-picker';
+iimport * as React from 'react';
+import { useRef, useState } from 'react';
+import { StyleSheet, View, Button, Text } from 'react-native';
+import { EmojiPicker } from 'react-native-mcemoji-picker';
 
-// ...
+export default function App() {
+  const anchorRef = useRef<any>();
+  const [emoji, setEmoji] = useState('none');
+  const [isPickerShow, setIsPickerShow] = useState(false);
 
-const result = await multiply(3, 7);
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Selected emoji: {emoji}</Text>
+      <Button
+        title="Select"
+        ref={anchorRef}
+        onPress={() => {
+          setIsPickerShow(true);
+        }}
+      />
+
+      <EmojiPicker
+        anchorRef={anchorRef}
+        show={isPickerShow}
+        onSelect={(emoji) => {
+          setEmoji(emoji);
+        }}
+        onClose={() => {
+          setIsPickerShow(false);
+        }}
+      />
+
+    </View>
+  );
+}
 ```
 
-## Contributing
-
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+## Preview
+<img src="./preview.png" width="300">
 
 ## License
 
 MIT
-
----
-
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)

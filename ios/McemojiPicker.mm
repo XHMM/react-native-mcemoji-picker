@@ -1,14 +1,11 @@
-#import <React/RCTBridgeModule.h>
+#import <React/RCTViewManager.h>
 
-@interface RCT_EXTERN_MODULE(McemojiPicker, NSObject)
+@interface RCT_EXTERN_MODULE(McemojiPickerViewManager, RCTViewManager)
 
-RCT_EXTERN_METHOD(multiply:(float)a withB:(float)b
-                 withResolver:(RCTPromiseResolveBlock)resolve
-                 withRejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXPORT_VIEW_PROPERTY(onSelect, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onClose, RCTDirectEventBlock)
 
-+ (BOOL)requiresMainQueueSetup
-{
-  return NO;
-}
-
+RCT_EXTERN_METHOD(open
+                  : (nonnull NSNumber*)tag
+                  forAnchor: (nonnull NSNumber*)anchor);
 @end
